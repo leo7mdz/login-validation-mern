@@ -18,7 +18,7 @@ export const typeLastName = Type.String({
   },
 });
 
-export const typeAge = Type.Number({
+export const typeAge = Type.String({
   errorMessage: {
     type: "El dato insertado debe ser en formato numero",
   },

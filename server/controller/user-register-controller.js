@@ -7,7 +7,7 @@ const registerController = async (req, res) => {
 
   const userEmail = await UserModel.findOne({ email }).exec();
   if (userEmail) {
-    return res.send("ya Existe un usuario con ese email");
+    return res.send({ message: "ya Existe un usuario con ese email" });
   }
 
   const hashPsw = await hash(password, SALT);
@@ -18,10 +18,11 @@ const registerController = async (req, res) => {
     age,
     profession,
     email,
+    password: hashPsw,
   });
 
   await newUser.save();
-  res.send(newUser);
+  res.send({ message: "Usuario registrado con exito" });
 };
 
 export default registerController;

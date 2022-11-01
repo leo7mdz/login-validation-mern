@@ -11,18 +11,21 @@ const loginController = async (req, res) => {
   const existingEmail = await UserModel.findOne({ email }).exec();
 
   if (!existingEmail) {
-    return res.send("Email no registrado");
+    return res.send({ message: "Email no registrado" });
   }
 
-  const comparePassword = bcrypt.compare(password, existingEmail.password);
+  const comparePassword = await bcrypt.compare(
+    password,
+    existingEmail.password
+  );
 
   if (!comparePassword) {
-    return res.send("password incorrecto");
+    return res.send({ message: "password incorrecto" });
   }
 
   const token = jwt.sign({ id: existingEmail._id }, process.env.SECRET_TOKEN);
 
-  return res.send(token);
+  return res.send({ token });
 };
 
 export default loginController;

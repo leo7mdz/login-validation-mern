@@ -13,7 +13,7 @@ const ajv = new Ajv({ allErrors: true })
   .addKeyword("kind")
   .addKeyword("modifier");
 
-ajv.addFormat("password", /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$/);
+ajv.addFormat("password", /[A-Za-z0-9!?-]{10,25}/);
 addFormats(ajv, ["email"]);
 addErrors(ajv);
 

@@ -10,7 +10,7 @@ const profileController = async (req, res) => {
   const exisitingUser = await UserModel.findById(id).exec();
 
   if (!exisitingUser) {
-    res.send("Usuario no autorizado");
+    res.send({ messsage: "Usuario no autorizado" });
   }
   const { name, lastname, age, profession, email } = exisitingUser;
   return res.send({
